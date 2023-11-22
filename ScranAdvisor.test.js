@@ -13,13 +13,13 @@ describe('ScranAdvisor', () => {
         expect(scranAdvisor.restaurants).not.toBeNull();
     })
 
-    test.skip('can count the number of restaurants', () => {
+    test('can count the number of restaurants', () => {
         const expected = 23;
-        const actual = null;
+        const actual = scranAdvisor.countRestaurants();
         expect(actual).toBe(expected);
     })
 
-    test.skip('can find Happy Lamb Hot Pot restaurant by full name', () => {
+    test('can find Happy Lamb Hot Pot restaurant by full name', () => {
         const expected = {
             "id": 8,
             "name": "Happy Lamb Hot Pot",
@@ -37,11 +37,11 @@ describe('ScranAdvisor', () => {
             "latitude": 52.475159788534754,
             "longitude": -1.8966440079643896
         };
-        const actual = null;
-        expect(actual).toBe(expected);
+        const actual = scranAdvisor.findRestaurantByName("Happy Lamb Hot Pot");
+        expect(actual).toEqual(expected);
     })
 
-    test.skip('can find the name of all restaurants', () => {
+    test('can find the name of all restaurants', () => {
         const expected = [
             'Oro',
             'Halloumi South',
@@ -67,11 +67,11 @@ describe('ScranAdvisor', () => {
             "Gopal's Corner Victoria",
             'The Gordon Highlander'
           ]
-          const actual = null;
-          expect(actual).toBe(expected);
+          const actual = scranAdvisor.getAllRestaurantNames();
+          expect(actual).toEqual(expected);
     })
 
-    test.skip('can find all restaurants from Glasgow', () => {
+    test('can find all restaurants from Glasgow', () => {
         const expected = [
             {
               id: 1,
@@ -118,19 +118,69 @@ describe('ScranAdvisor', () => {
               longitude: -4.255168672861043
             }
           ];
-          const actual = null;
-          expect(actual).toBe(expected);
+          const actual = scranAdvisor.getRestaurantsByCity('Glasgow');
+          expect(actual).toEqual(expected);
     })
 
     // Extensions
 
-    test.skip('can find the most common cuisine type', () => {
+    test('can find the most common cuisine type', () => {
+      const expected = 'JAPANESE';
+      const actual = scranAdvisor.mostCommonCuisine();
+      expect(actual).toBe(expected);
+    });
 
-    })
-
-    test.skip('can find restaurant with substring', () => {
-
-    })
+    test('can find restaurant with substring', () => {
+      const expected = [
+            {
+              "id": 3,
+              "name": "The Brunch Club",
+              "address": "67 Old Dumbarton Road",
+              "postcode": "G3 8RF",
+              "website": "https://www.thebrunchclub.co/",
+              "cuisines": ["BRUNCH"],
+              "location": {
+                  "id": 2,
+                  "town": "Glasgow",
+                  "neighbourhood": "West End"
+              },
+              "latitude": 55.867491696125064,
+              "longitude": -4.293176500740617
+          },
+          {
+              "id": 6,
+              "name": "Rudy's Pizza",
+              "address": "Peter Street",
+              "postcode": "M2 5QJ",
+              "website": "https://www.rudyspizza.co.uk/pizzerias/peterst",
+              "cuisines": ["PIZZA"],
+              "location": {
+                  "id": 5,
+                  "town": "Manchester",
+                  "neighbourhood": "City Centre"
+              },
+              "latitude": 53.47842331842055,
+              "longitude": -2.2474895790689655
+          },
+          {
+              "id": 16,
+              "name": "Humble Crumble Camden",
+              "address": "Unit 739, Camden Market",
+              "postcode": "NW1 8AH",
+              "website": "https://www.humble-crumble.com/",
+              "cuisines": ["SWEET"],
+              "location": {
+                  "id": 13,
+                  "town": "London",
+                  "neighbourhood": "Camden"
+              },
+              "latitude": 51.54257526961926,
+              "longitude": -0.1481973203643318
+          }
+      ];
+      const actual = scranAdvisor.searchByName('ru');
+      expect(actual).toEqual(expected);
+  });
 
 
 })
